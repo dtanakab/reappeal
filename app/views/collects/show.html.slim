@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @collect.name
+p
+  strong File name:
+  = @collect.file_name
+
+=> link_to 'Edit', edit_collect_path(@collect)
+'|
+=< link_to 'Back', collects_path
