@@ -1,23 +1,13 @@
-h1 Listing collects
+h1 画像の一覧
 
-table
-  thead
-    tr
-      th Name
-      th File name
-      th
-      th
-      th
-
-  tbody
-    - @collects.each do |collect|
-      tr
-        td = collect.name
-        td = collect.file_name
-        td = link_to 'Show', collect
-        td = link_to 'Edit', edit_collect_path(collect)
-        td = link_to 'Destroy', collect, data: { confirm: 'Are you sure?' }, method: :delete
+- @collects.each do |collect|
+  = "・" + collect.name
+  br
+  = "・" + collect.file_name
+  br
+  = image_tag("/images_for_movie/#{collect.id}.jpg")
 
 br
-
-= link_to 'New Collect', new_collect_path
+= link_to "新規作成", new_collect_path
+br
+= video_tag "/images_for_movie/sample10.mp4", controls: true
