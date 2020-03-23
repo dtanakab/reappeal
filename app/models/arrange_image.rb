@@ -5,20 +5,20 @@ require "mini_magick"
 GRAVITY = "center"
 TEXT_POSITION = "0,0"
 FONT = "./app/assets/fonts/irohamaru-Medium.ttf"
-FONT_SIZE = 60
+FONT_SIZE = 50
 INDENTION_COUNT = 14
-ROW_LIMIT = 2
+ROW_LIMIT = 3
 BACKGROUND = "#FFFFFF"
-FRAME_SIZE = "1280x960"
+FRAME_SIZE = "800x600"
 BELT = MiniMagick::Image.open("public/images_for_movie/belt.jpg")
-BELT_POSITION = "+0+360"
+BELT_POSITION = "+0+180"
 
 class ArrangeImage
-  def initialize(path, word)
-    @image = arrange_size(MiniMagick::Image.open(path))
-    @text = arrange_text(word)
+  def initialize(slide)
+    @image = arrange_size(MiniMagick::Image.open(CGI.unescape("public" + slide.image.url)))
+    @text = arrange_text(slide.arrange_text(slide.element_type))
     result = draw_text(put_belt(@image), @text)
-    result.write path
+    result.write (CGI.unescape("public" + slide.image.url))
   end
 
   private

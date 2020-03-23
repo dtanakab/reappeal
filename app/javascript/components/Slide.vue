@@ -52,7 +52,7 @@ export default {
       }
     },
     fetchPathsByUserId: async function() {
-      const res = await axios.get(`/api/slides#user_id=${this.userId}`);
+      const res = await axios.get(`/users/${this.userId}/api/slides`);
       if (res.status !== 200) {
         process.exit();
       }

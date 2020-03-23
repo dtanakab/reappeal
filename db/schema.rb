@@ -10,45 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_031941) do
+ActiveRecord::Schema.define(version: 2020_03_23_062650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "collects", force: :cascade do |t|
-    t.string "name"
-    t.string "file_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "url"
-    t.boolean "fix", default: false
-    t.boolean "replace", default: false
-  end
-
-  create_table "elment_types", force: :cascade do |t|
+  create_table "element_types", force: :cascade do |t|
     t.string "column_name"
-    t.string "search_word_support"
-    t.string "before_word_support"
-    t.string "after_word_support"
-    t.string "another_support"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "image_urls", force: :cascade do |t|
-    t.string "url"
+    t.string "before_word_support", default: ""
+    t.string "after_word_support", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "slides", force: :cascade do |t|
     t.string "search_word"
-    t.string "before_word"
-    t.string "after_word"
+    t.string "before_word", default: ""
+    t.string "after_word", default: ""
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.bigint "element_type_id"
+    t.index ["element_type_id"], name: "index_slides_on_element_type_id"
     t.index ["user_id"], name: "index_slides_on_user_id"
   end
 
