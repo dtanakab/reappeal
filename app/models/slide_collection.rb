@@ -18,10 +18,11 @@ class SlideCollection
     end
   end
 
-  def fetch_image_url(search_word)
-    searcher = Google::Apis::CustomsearchV1::CustomsearchService.new
-    searcher.key = ENV["API_KEY"]
-    results = searcher.list_cses(search_word, cx: ENV["CSE_ID"], search_type: "image", num: 1, start: 1)
-    results.items[0].link
-  end
+  private
+    def fetch_image_url(search_word)
+      searcher = Google::Apis::CustomsearchV1::CustomsearchService.new
+      searcher.key = ENV["API_KEY"]
+      results = searcher.list_cses(search_word, cx: ENV["CSE_ID"], search_type: "image", num: 1, start: 1)
+      results.items[0].link
+    end
 end
