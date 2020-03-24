@@ -5,9 +5,9 @@
     </div>
 
     <div class="slides_footer">
-      <button v-on:click="preview()" v-bind:disabled="nowIndex == 0">PREV</button>
+      <button v-on:click="preview()" v-bind:disabled="nowIndex == 0">前へ</button>
       <div class="slides_footer_dot">{{ nowIndex + 1 }} ／ {{ slideList.length }} ページ</div>
-      <button v-on:click="next()" v-bind:disabled="nowIndex == slideList.length - 1">NEXT</button>
+      <button v-on:click="next()" v-bind:disabled="nowIndex == slideList.length - 1">次へ</button>
     </div>
   </div>
 </template>
@@ -40,18 +40,25 @@ export default {
         this.slideList.push(result[i].image.url);
       }
     });
-    this.screenChannel = this.$cable.subscriptions.create("ScreenChannel", {
-      received: data => {
-        this.index = data["operate"];
+    this.screenChannel = this.$cable.subscriptions.create(
+      {
+        channel: "ScreenChannel",
+        user_id: this.userId
+      },
+      {
+        received: data => {
+          this.index = data["operate"];
+        }
       }
-    });
+    );
   },
   methods: {
     preview() {
       if (this.index > 0) {
         this.index--;
         this.screenChannel.perform("operate", {
-          operate: this.index
+          operate: this.index,
+          user_id: this.userId
         });
       }
     },
@@ -59,7 +66,8 @@ export default {
       if (this.index < this.slideList.length - 1) {
         this.index++;
         this.screenChannel.perform("operate", {
-          operate: this.index
+          operate: this.index,
+          user_id: this.userId
         });
       }
     },
