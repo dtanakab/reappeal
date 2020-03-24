@@ -5,7 +5,9 @@ class Slide < ApplicationRecord
   belongs_to :element_type
   mount_uploader :image, ImagesUploader
 
-  scope :filter_by_user, ->(user_id) { where(user_id: user_id, active: true) if user_id }
+  scope :filter_by_user, ->(user_id) do
+    where(user_id: user_id, active: true).where.not(image: nil) if user_id
+  end
 
   def arranged_text
     if element_type.id == 1
@@ -16,6 +18,10 @@ class Slide < ApplicationRecord
   end
 
   def image_url
-    CGI.unescape("public" + image.url)
+    CGI.unescape(image.url)
+  end
+
+  def search_target?
+    active == true && search_word != ""
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "mini_magick"
+require "tempfile"
 
 GRAVITY = "center"
 TEXT_POSITION = "0,0"
@@ -10,15 +11,19 @@ INDENTION_COUNT = 14
 ROW_LIMIT = 3
 BACKGROUND = "#FFFFFF"
 FRAME_SIZE = "800x600"
-BELT = MiniMagick::Image.open("public/images_for_movie/belt.jpg")
+BELT = MiniMagick::Image.open("./app/assets/images/belt.jpg")
 BELT_POSITION = "+0+180"
 
 class ArrangeImage
-  def initialize(slide)
-    @image = arrange_size(MiniMagick::Image.open(slide.image_url))
+  def initialize(slide, url)
+    @image = arrange_size(MiniMagick::Image.open(url))
     @text = reshape_text(slide.arranged_text)
     result = draw_text(put_belt(@image), @text)
-    result.write (slide.image_url)
+    Tempfile.create do |f|
+      result.write f
+      slide.image = MiniMagick::Image.open(f)
+      slide.save
+    end
   end
 
   private

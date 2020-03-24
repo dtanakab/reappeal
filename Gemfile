@@ -85,3 +85,4 @@ gem "slim-rails"
 gem "google-api-client"
 gem "mini_magick"
 gem "streamio-ffmpeg"
+gem 'fog-aws'

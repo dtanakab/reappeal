@@ -3,18 +3,17 @@
 require "google/apis/customsearch_v1"
 require "open-uri"
 
-COVER = "public/images_for_movie/belt.jpg"
+COVER = "./app/assets/images/belt.jpg"
 
 class SlideCollection
   def initialize(slides)
     slides.each do |slide|
       if slide.element_type_id == 1
-        slide.image = open(COVER)
+        @url = COVER
       else
-        slide.remote_image_url = fetch_image_url(slide.search_word)
+        @url = fetch_image_url(slide.search_word)
       end
-      slide.save
-      ArrangeImage.new(slide)
+      ArrangeImage.new(slide, @url)
     end
   end
 
