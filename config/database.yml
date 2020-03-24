@@ -22,6 +22,3 @@ test:
 
 production:
   <<: *default
-  database: reappeal_production
-  username: reappeal
-  password: <%= ENV['REAPPEAL_DATABASE_PASSWORD'] %>

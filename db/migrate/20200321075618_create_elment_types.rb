@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateElmentTypes < ActiveRecord::Migration[6.0]
   def change
     create_table :elment_types do |t|

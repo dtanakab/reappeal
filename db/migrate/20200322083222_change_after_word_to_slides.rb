@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeAfterWordToSlides < ActiveRecord::Migration[6.0]
   def change
     change_column_default :slides, :after_word, from: nil, to: ""

@@ -12,7 +12,8 @@ module Reappeal
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-
+    ActionCable.server.config.disable_request_forgery_protection = true
+    config.action_cable.url = "wss://self-introduction-slideshow.herokuapp.com/cable"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
