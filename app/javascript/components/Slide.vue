@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       slideList: [],
-      index: 0
+      index: 0,
+      screenChannel: null
     };
   },
   computed: {
@@ -39,16 +40,27 @@ export default {
         this.slideList.push(result[i].image.url);
       }
     });
+    this.screenChannel = this.$cable.subscriptions.create("ScreenChannel", {
+      received: data => {
+        this.index = data["operate"];
+      }
+    });
   },
   methods: {
     preview() {
       if (this.index > 0) {
         this.index--;
+        this.screenChannel.perform("operate", {
+          operate: this.index
+        });
       }
     },
     next() {
       if (this.index < this.slideList.length - 1) {
         this.index++;
+        this.screenChannel.perform("operate", {
+          operate: this.index
+        });
       }
     },
     fetchPathsByUserId: async function() {
