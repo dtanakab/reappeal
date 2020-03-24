@@ -11,8 +11,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      SlideCollection.new(@user.slides)
-      redirect_to @user, notice: "ユーザーを作成しました"
+      SlideCollection.new(@user.slides.select { |s| s.active == true })
+      redirect_to @user
     else
       render :new
     end
@@ -27,6 +27,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, slides_attributes: [:register, :element_type_id, :search_word, :before_word, :after_word])
+      params.require(:user).permit(:name, slides_attributes: [:element_type_id, :search_word, :before_word, :after_word, :active])
     end
 end

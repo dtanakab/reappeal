@@ -15,14 +15,14 @@ BELT_POSITION = "+0+180"
 
 class ArrangeImage
   def initialize(slide)
-    @image = arrange_size(MiniMagick::Image.open(CGI.unescape("public" + slide.image.url)))
-    @text = arrange_text(slide.arrange_text(slide.element_type))
+    @image = arrange_size(MiniMagick::Image.open(slide.image_url))
+    @text = reshape_text(slide.arranged_text)
     result = draw_text(put_belt(@image), @text)
-    result.write (CGI.unescape("public" + slide.image.url))
+    result.write (slide.image_url)
   end
 
   private
-    def arrange_text(text)
+    def reshape_text(text)
       text.scan(/.{1,#{INDENTION_COUNT}}/)[0...ROW_LIMIT].join("\n")
     end
 
