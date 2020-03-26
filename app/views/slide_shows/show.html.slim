@@ -1,7 +1,12 @@
 h1 スライドショーをみる
 
-.test#slide
-  slide :slide-show-id=@slide_show.id
-
+- if @slide_show.slides.any?
+  .test#slide
+    slide :slide-show-id=@slide_show.id
+- else
+  | まだスライドが作成されていません
+  br
+  = link_to "項目を入力してスライドショーを作成", edit_slide_show_path(current_slide_show)
+br
 br
 = link_to "トップページへ戻る", root_path

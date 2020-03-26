@@ -2,6 +2,7 @@
 
 class SlideShowsController < ApplicationController
   before_action :set_slide_show, only: %i[show edit update]
+  before_action :require_authentication
 
   def show
   end
@@ -21,10 +22,16 @@ class SlideShowsController < ApplicationController
 
   private
     def set_slide_show
-      @slide_show = current_slide_show
+      @slide_show = SlideShow.find(params[:id])
     end
 
     def slide_show_params
       params.require(:slide_show).permit(:show_name, slides_attributes: [:element_type_id, :search_word, :before_word, :after_word, :active])
+    end
+
+    def require_authentication
+      if @slide_show != current_slide_show
+        redirect_to root_path, alert: "スライドショーIDとパスワードの入力が必要です"
+      end
     end
 end
