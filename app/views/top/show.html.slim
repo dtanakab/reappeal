@@ -8,4 +8,14 @@ h3
   strong 紹介メッセージ
 
 h3
-  = link_to "自己紹介スライドを作成", new_user_path
+  - if current_slide_show
+    = link_to "新たなスライドショーを作成する（ログアウト）", destroy_slide_show_session_path, method: :delete
+    br
+    br
+    = link_to "スライドショーを見る", current_slide_show
+
+  - else
+    = link_to "新たなスライドショーを作成する（アカウント作成）", new_slide_show_registration_path
+    br
+    br
+    = link_to "スライドショーを見る", new_slide_show_session_path

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class Slide < ApplicationRecord
-  belongs_to :user
+  belongs_to :slide_show
   belongs_to :element_type
   mount_uploader :image, ImagesUploader
 
-  scope :filter_by_user, ->(user_id) do
-    where(user_id: user_id, active: true).where.not(image: nil) if user_id
+  scope :filter_by_slide_show, ->(slide_show_id) do
+    where(slide_show_id: slide_show_id, active: true).where.not(image: nil) if slide_show_id
   end
 
   def arranged_text

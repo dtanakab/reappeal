@@ -1,0 +1,28 @@
+h2
+  | スライドショーを作成
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = render "devise/shared/error_messages", resource: resource
+  | スライドショーIDとパスワードを他の人と共有することで、スライドショーを共有できます
+  br
+  | 共有を考えている場合、他の人と共有しても問題が無いIDやパスワードを設定しましょう
+  br
+  | （NG：普段他サービスなどで使用している自身のIDやパスワード）
+  br
+  br
+  .field
+    | スライドショーID（英数字4~20字）
+    br
+    = f.text_field :show_name
+  .field
+    | パスワード(英数字6文字以上)
+    br
+    = f.password_field :password, autocomplete: "new-password"
+  .field
+    | パスワード（確認）
+    br
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+
+  .actions
+    = f.submit "スライドショーID・パスワードを決定"
+br
+= link_to "トップページへ戻る", root_path

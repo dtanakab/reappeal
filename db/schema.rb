@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_055836) do
+ActiveRecord::Schema.define(version: 2020_03_26_040623) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +21,14 @@ ActiveRecord::Schema.define(version: 2020_03_24_055836) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "slide_shows", force: :cascade do |t|
+    t.string "show_name", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["show_name"], name: "index_slide_shows_on_show_name", unique: true
+  end
+
   create_table "slides", force: :cascade do |t|
     t.string "search_word", default: ""
     t.string "before_word", default: ""
@@ -29,11 +36,11 @@ ActiveRecord::Schema.define(version: 2020_03_24_055836) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
     t.bigint "element_type_id"
     t.boolean "active", default: false
+    t.bigint "slide_show_id"
     t.index ["element_type_id"], name: "index_slides_on_element_type_id"
-    t.index ["user_id"], name: "index_slides_on_user_id"
+    t.index ["slide_show_id"], name: "index_slides_on_slide_show_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +48,5 @@ ActiveRecord::Schema.define(version: 2020_03_24_055836) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
 end

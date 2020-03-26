@@ -1,14 +1,10 @@
-= form_for @user do |f|
-  - if @user.errors.any?
+= form_for @slide_show do |f|
+  - if @slide_show.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} エラーのため保存してません:"
+      h2 = "#{pluralize(@slide_show.errors.count, "error")} エラーのため保存してません:"
       ul
-        - @user.errors.full_messages.each do |message|
+        - @slide_show.errors.full_messages.each do |message|
           li = message
-
-  .field
-    h3 希望するユーザーIDを入力してください（英数字6文字以上、重複不可）
-    = f.text_field :name
 
   = f.fields_for :slides do |g|
     = g.check_box :active, checked: true
@@ -87,4 +83,5 @@
     = o.hidden_field :element_type_id, value: 9
     br
 
-  .actions = f.submit
+  .actions 
+    = f.submit "スライドショーを作成"

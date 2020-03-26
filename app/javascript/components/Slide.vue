@@ -18,7 +18,7 @@ import { csrfToken } from "rails-ujs";
 axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken();
 
 export default {
-  props: ["userId"],
+  props: ["slideShowId"],
   data() {
     return {
       slideList: [],
@@ -35,7 +35,7 @@ export default {
     }
   },
   created: function() {
-    this.fetchPathsByUserId().then(result => {
+    this.fetchPathsBySlideShowId().then(result => {
       for (let i = 0, len = result.length; i < len; ++i) {
         this.slideList.push(result[i].image.url);
       }
@@ -43,7 +43,7 @@ export default {
     this.screenChannel = this.$cable.subscriptions.create(
       {
         channel: "ScreenChannel",
-        user_id: this.userId
+        slide_show_id: this.slideShowId
       },
       {
         received: data => {
@@ -58,7 +58,7 @@ export default {
         this.index--;
         this.screenChannel.perform("operate", {
           operate: this.index,
-          user_id: this.userId
+          slide_show_id: this.slideShowId
         });
       }
     },
@@ -67,12 +67,14 @@ export default {
         this.index++;
         this.screenChannel.perform("operate", {
           operate: this.index,
-          user_id: this.userId
+          slide_show_id: this.slideShowId
         });
       }
     },
-    fetchPathsByUserId: async function() {
-      const res = await axios.get(`/users/${this.userId}/api/slides`);
+    fetchPathsBySlideShowId: async function() {
+      const res = await axios.get(
+        `/slide_shows/${this.slideShowId}/api/slides`
+      );
       if (res.status !== 200) {
         process.exit();
       }
