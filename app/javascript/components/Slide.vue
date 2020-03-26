@@ -9,6 +9,16 @@
       <div class="slides_footer_dot">{{ nowIndex + 1 }} ／ {{ slideList.length }} ページ</div>
       <button v-on:click="next()" v-bind:disabled="nowIndex == slideList.length - 1">次へ</button>
     </div>
+
+    <div class="connect_button" v-if="screenChannel">
+      <p>あなたの他に本スライドショーの閲覧者が存在し、</p>
+      <p>同期設定にしている場合、閲覧スライドページが共有されます</p>
+      <button v-on:click="disConnectChannel()">他閲覧者とのスライドページの同期を解除</button>
+    </div>
+    <div class="disconnect_button" v-else>
+      <p>現在あなたの閲覧スライドページは共有されていません</p>
+      <button v-on:click="connectChannel()">他閲覧者とスライドページを同期する</button>
+    </div>
   </div>
 </template>
 
@@ -54,8 +64,8 @@ export default {
   },
   methods: {
     preview() {
-      if (this.index > 0) {
-        this.index--;
+      this.index--;
+      if (this.screenChannel != null) {
         this.screenChannel.perform("operate", {
           operate: this.index,
           slide_show_id: this.slideShowId
@@ -63,8 +73,8 @@ export default {
       }
     },
     next() {
-      if (this.index < this.slideList.length - 1) {
-        this.index++;
+      this.index++;
+      if (this.screenChannel != null) {
         this.screenChannel.perform("operate", {
           operate: this.index,
           slide_show_id: this.slideShowId
@@ -79,6 +89,23 @@ export default {
         process.exit();
       }
       return res.data;
+    },
+    connectChannel() {
+      this.screenChannel = this.$cable.subscriptions.create(
+        {
+          channel: "ScreenChannel",
+          slide_show_id: this.slideShowId
+        },
+        {
+          received: data => {
+            this.index = data["operate"];
+          }
+        }
+      );
+    },
+    disConnectChannel() {
+      this.screenChannel.perform("unsubscribed", {});
+      this.screenChannel = null;
     }
   }
 };

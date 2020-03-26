@@ -5,6 +5,10 @@ class ScreenChannel < ApplicationCable::Channel
     stream_from "screen_channel_#{params["slide_show_id"]}"
   end
 
+  def unsubscribed
+    stop_all_streams
+  end
+
   def operate(data)
     ActionCable.server.broadcast "screen_channel_#{data["slide_show_id"]}", operate: data["operate"]
   end

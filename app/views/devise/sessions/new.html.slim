@@ -2,11 +2,11 @@ h2
   | 閲覧するスライドショーのIDとパスワードを入力
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .field
-    = f.label "スライドショーID"
+    | スライドショーID
     br
     = f.text_field :show_name
   .field
-    = f.label :password
+    | パスワード
     br
     = f.password_field :password, autocomplete: "current-password"
   .actions
