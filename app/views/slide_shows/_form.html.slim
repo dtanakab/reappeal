@@ -6,82 +6,147 @@
         - @slide_show.errors.full_messages.each do |message|
           li = message
 
-  = f.fields_for :slides do |g|
-    = g.check_box :active, checked: true
-    | スライドショータイトル：
-    = g.text_field :search_word, placeholder: "（例）田中大輔の自己紹介スライドショー", size: 40
-    = g.hidden_field :element_type_id, value: 1
-    br
+  table
+    thead
+      tr
+        th 作成
+        th 項目名
+        th 入力欄1
+        th 入力欄2
+        th 対象年
+    tbody
+      = f.fields_for :slides do |g|
+        tr
+          td
+            = g.check_box :active, checked: true
+          td
+            | スライドショータイトル
+          td
+            = g.text_field :search_word, placeholder: "（例）田中大輔の自己紹介スライドショー", size: 40
+          td
+            | -
+          td
+            | -
+        = g.hidden_field :element_type_id, value: 1
+      = f.fields_for :slides do |h|
+        tr
+          td
+            = h.check_box :active, checked: true
+          td
+            | 学歴1（卒業高校）
+          td
+            = h.text_field :search_word, placeholder: "（例）六甲学院高等学校", size: 40
+          td
+            | -
+          td
+            = h.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, 2000)
+            | 卒業
+        = h.hidden_field :element_type_id, value: 2
 
-  = f.fields_for :slides do |h|
-    = h.check_box :active, checked: true
-    | 学歴1（卒業高校）：
-    = h.text_field :search_word, placeholder: "（例）六甲学院高等学校", size: 40
-    = h.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, 2000)
-    | 卒業
-    = h.hidden_field :element_type_id, value: 2
-    br
+      = f.fields_for :slides do |i|
+        tr
+          td
+            = i.check_box :active, checked: true
+          td
+            | 学歴2（卒業大学/学部）
+          td
+            = i.text_field :search_word, placeholder: "（例）大阪大学経済学部", size: 40
+          td 
+            | -
+          td
+            = i.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, 2000)
+            | 卒業
+        = i.hidden_field :element_type_id, value: 3
 
-  = f.fields_for :slides do |i|
-    = i.check_box :active, checked: true
-    | 学歴1（卒業大学/学部）：
-    = i.text_field :search_word, placeholder: "（例）大阪大学経済学部", size: 40
-    = i.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, 2000)
-    | 卒業
-    = i.hidden_field :element_type_id, value: 3
-    br
+      = f.fields_for :slides do |j|
+        tr
+          td
+            = j.check_box :active, checked: true
+          td
+            | 職歴1
+          td
+            = j.text_field :search_word, placeholder: "（例）エムスリー株式会社", size: 40
+          td
+            | -
+          td
+            = j.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, 2000)
+            | 入社
+          td
+        = j.hidden_field :element_type_id, value: 4
 
-  = f.fields_for :slides do |j|
-    = j.check_box :active, checked: true
-    | 職歴1：
-    = j.text_field :search_word, placeholder: "（例）エムスリー株式会社", size: 40
-    = j.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, 2000)
-    | 入社
-    = j.hidden_field :element_type_id, value: 4
-    br
+      = f.fields_for :slides do |k|
+        tr
+          td
+            = k.check_box :active, checked: true
+          td
+            | 職歴2
+          td
+            = k.text_field :search_word, placeholder: "（例）ANNONE株式会社", size: 40
+          td
+            | -
+          td
+            = k.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, 2000)
+            | 入社
+        = k.hidden_field :element_type_id, value: 5
 
-  = f.fields_for :slides do |k|
-    = k.check_box :active, checked: true
-    | 職歴2：
-    = k.text_field :search_word, placeholder: "（例）ANNONE株式会社", size: 40
-    = k.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, 2000)
-    | 入社
-    = k.hidden_field :element_type_id, value: 5
-    br
+      = f.fields_for :slides do |l|
+        tr
+          td
+            = l.check_box :active, checked: true
+          td
+            | 免許/資格1：
+          td
+            = l.text_field :search_word, placeholder: "（例）普通自動車", size: 40
+          td
+            = l.text_field :before_word, placeholder: "（例）免許", size: 30
+          td
+            = l.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, 2000)
+            | 取得
+        = l.hidden_field :element_type_id, value: 6
 
-  = f.fields_for :slides do |l|
-    = l.check_box :active, checked: true
-    | 免許/資格1：
-    = l.text_field :search_word, placeholder: "（例）普通自動車", size: 20
-    = l.text_field :before_word, placeholder: "（例）免許/990点/準一級", size: 20
-    = l.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, 2000)
-    | 取得
-    = l.hidden_field :element_type_id, value: 6
-    br
+      = f.fields_for :slides do |m|
+        tr
+          td
+            = m.check_box :active, checked: true
+          td
+            | 免許/資格2：
+          td
+            = m.text_field :search_word, placeholder: "（例）TOEIC/英検", size: 40
+          td
+            = m.text_field :before_word, placeholder: "（例）990点/準一級", size: 30
+          td
+            = m.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, 2000)
+            | 取得
+        = m.hidden_field :element_type_id, value: 7
 
-  = f.fields_for :slides do |m|
-    = m.check_box :active, checked: true
-    | 免許/資格2：
-    = m.text_field :search_word, placeholder: "（例）TOEIC", size: 40
-    = m.text_field :before_word, placeholder: "（例）免許/990点/準一級", size: 20
-    = m.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, 2000)
-    | 取得
-    = m.hidden_field :element_type_id, value: 7
-    br
+      = f.fields_for :slides do |n|
+        tr
+          td
+            = n.check_box :active, checked: true
+          td
+            | 趣味：
+          td
+            = n.text_field :search_word, placeholder: "（例）サイクリング", size: 40
+          td
+            | -
+          td
+            | -
+        = n.hidden_field :element_type_id, value: 8
 
-  = f.fields_for :slides do |n|
-    = n.check_box :active, checked: true
-    | 趣味：
-    = n.text_field :search_word, placeholder: "（例）サイクリング", size: 40
-    = n.hidden_field :element_type_id, value: 8
-    br
+      = f.fields_for :slides do |o|
+        tr
+          td
+            = o.check_box :active, checked: true
+          td
+            | 特技：
+          td
+            = o.text_field :search_word, placeholder: "（例）ジャグリング", size: 40
+          td
+            | -
+          td
+            | -
+        = o.hidden_field :element_type_id, value: 9
 
-  = f.fields_for :slides do |o|
-    = o.check_box :active, checked: true
-    | 特技：
-    = o.text_field :search_word, placeholder: "（例）ジャグリング", size: 40
-    = o.hidden_field :element_type_id, value: 9
-    br
-
+  br
   .actions 
     = f.submit "スライドショーを作成"
