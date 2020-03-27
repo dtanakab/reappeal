@@ -39,7 +39,7 @@
           td
             | -
           td
-            = h.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, 2000)
+            = h.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, "\n（2000年卒業）")
             | 卒業
         = h.hidden_field :element_type_id, value: 2
 
@@ -54,7 +54,7 @@
           td 
             | -
           td
-            = i.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, 2000)
+            = i.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, "\n（2000年卒業）")
             | 卒業
         = i.hidden_field :element_type_id, value: 3
 
@@ -69,7 +69,7 @@
           td
             | -
           td
-            = j.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, 2000)
+            = j.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, "\n（2000年入社）")
             | 入社
           td
         = j.hidden_field :element_type_id, value: 4
@@ -85,7 +85,7 @@
           td
             | -
           td
-            = k.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, 2000)
+            = k.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年入社）"] }, "\n（2000年入社）")
             | 入社
         = k.hidden_field :element_type_id, value: 5
 
@@ -100,7 +100,7 @@
           td
             = l.text_field :before_word, placeholder: "（例）免許", size: 30
           td
-            = l.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, 2000)
+            = l.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, "\n（2000年取得）")
             | 取得
         = l.hidden_field :element_type_id, value: 6
 
@@ -115,7 +115,7 @@
           td
             = m.text_field :before_word, placeholder: "（例）990点/準一級", size: 30
           td
-            = m.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, 2000)
+            = m.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年取得）"] }, "\n（2000年取得）")
             | 取得
         = m.hidden_field :element_type_id, value: 7
 
@@ -150,3 +150,6 @@
   br
   .actions 
     = f.submit "スライドショーを作成"
+  | スライドショーの作成〜完成まで10~30秒程度かかります。
+  br
+  | 戻るボタンなどを押さず、そのままお待ちください。

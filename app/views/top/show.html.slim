@@ -1,11 +1,22 @@
 h2
   strong 自己紹介スライドかんたん作成サービス
 
-h3
-  strong デモ動画
+h4
+  br
+  | 本サービスは、項目にキーワードを入力するだけで、
+  br
+  | 簡単に自己紹介スライドショーが作成できるサービスです。
+  br
+  br
+  | 作成したスライドのIDとパスワードを共有すれば、
+  br
+  | 他の人と異なるブラウザ、デバイスでスライドページを共有しながら閲覧することが可能です。
 
-h3
-  strong 紹介メッセージ
+h2
+  br
+  | イメージ動画
+  br
+  = video_tag("introduction.mp4", muted: true, controls: true, width: "700")
 
 h3
   - if current_slide_show
