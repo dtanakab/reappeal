@@ -7,13 +7,15 @@ COVER = "./app/assets/images/belt.jpg"
 
 class SlideCollection
   def initialize(slides)
-    slides.each do |slide|
-      if slide.element_type_id == 1
-        @url = COVER
-      else
-        @url = fetch_image_url(slide.search_word)
+    if slides.any?
+      slides.each do |slide|
+        if slide.element_type_id == 1
+          @url = COVER
+        else
+          @url = fetch_image_url(slide.search_word)
+        end
+        ArrangeImage.new(slide, @url)
       end
-      ArrangeImage.new(slide, @url)
     end
   end
 

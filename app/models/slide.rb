@@ -17,10 +17,6 @@ class Slide < ApplicationRecord
     end
   end
 
-  def image_url
-    CGI.unescape(image.url)
-  end
-
   def search_target?
     active == true && search_word != ""
   end

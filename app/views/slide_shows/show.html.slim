@@ -1,8 +1,10 @@
-h1 スライドショーをみる
+h1 スライドショーページ
 
-- if @slide_show.slides.any?
+- if @slide_show.slides.where.not(image: nil).any?
   .test#slide
     slide :slide-show-id=@slide_show.id
+- elsif @slide_show.slides.any?
+  | 表示できるスライドがありません。トップページからスライドを作成し直してください。
 - else
   | まだスライドが作成されていません
   br

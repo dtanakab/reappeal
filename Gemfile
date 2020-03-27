@@ -36,6 +36,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rails-controller-testing"
   gem "rspec-rails"
+  gem "action-cable-testing"
 end
 
 group :development do
@@ -85,4 +86,4 @@ gem "slim-rails"
 gem "google-api-client"
 gem "mini_magick"
 gem "streamio-ffmpeg"
-gem 'fog-aws'
+gem "fog-aws"

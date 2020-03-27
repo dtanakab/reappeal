@@ -17,9 +17,13 @@ module RequestSpecHelper
   end
 
   def common_set_up
-    @admin, @user1 = create(:admin), create(:user1)
-    create(:monday)
-    create(:tuesday)
+    types = %i(
+      element_type1 element_type2 element_type3 element_type4
+      element_type5 element_type6 element_type7 element_type8 element_type9
+    )
+    types.each { |type| create(type) }
+    @slide_show = create(:slide_show1)
+    @visible_slide_show = create(:slide_show3)
   end
 
   private

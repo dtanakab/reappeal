@@ -8,7 +8,7 @@ class SlideShowsController < ApplicationController
   end
 
   def edit
-    @slide_show.slides.build
+    require_empty_image_slides
   end
 
   def update
@@ -27,6 +27,14 @@ class SlideShowsController < ApplicationController
 
     def slide_show_params
       params.require(:slide_show).permit(:show_name, slides_attributes: [:element_type_id, :search_word, :before_word, :after_word, :active])
+    end
+
+    def require_empty_image_slides
+      if @slide_show.slides.any?
+        redirect_to @slide_show, alert: "すでにスライドショーを作成済みです"
+      else
+        @slide_show.slides.build
+      end
     end
 
     def require_authentication
