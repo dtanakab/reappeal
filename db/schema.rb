@@ -43,4 +43,8 @@ ActiveRecord::Schema.define(version: 2020_03_26_060507) do
     t.index ["element_type_id"], name: "index_slides_on_element_type_id"
     t.index ["slide_show_id"], name: "index_slides_on_slide_show_id"
   end
+<<<<<<< HEAD
+=======
+
+>>>>>>> 93d1f59ad776a8d7a574f52a1a5528a1de5807ac
 end

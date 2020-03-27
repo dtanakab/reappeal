@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サービスページ
+https://self-introduction-slideshow.herokuapp.com/
 
-Things you may want to cover:
+## 本サービスについて
 
-* Ruby version
+本サービスは、項目にワードを入力するだけで、
 
-* System dependencies
+簡単に自己紹介スライドショーが作成できるサービスです。
+  
+作成したスライドのIDとパスワードを共有すれば、
 
-* Configuration
+他の人と異なるブラウザ、デバイスでスライドページを共有しながら閲覧することが可能です。
+  
+## Lint
+rubocopとslim-lintを実行  
+`$ ./bin/lint`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Test実行
+RSpecテストが実行されます  
+  `$ ./bin/test`
