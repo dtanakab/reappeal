@@ -51,7 +51,7 @@
             | 学歴2（卒業大学/学部）
           td
             = i.text_field :search_word, placeholder: "（例）大阪大学経済学部", size: 40
-          td 
+          td
             | -
           td
             = i.select :after_word, options_for_select((1980..2020).map{|n| ["#{n}年", "\n（#{n}年卒業）"] }, "\n（2000年卒業）")
@@ -148,7 +148,7 @@
         = o.hidden_field :element_type_id, value: 9
 
   br
-  .actions 
+  .actions
     = f.submit "スライドショーを作成"
   | スライドショーの作成〜完成まで10~30秒程度かかります。
   br
