@@ -14,8 +14,7 @@ class SlideShowsController < ApplicationController
   def update
     if @slide_show.update(slide_show_params)
       slides = @slide_show.slides.select { |s| s.search_target? }
-      slide_collection = SlideCollection.new(slides) if slides.any?
-      slide_collection.process_images if slide_collection
+      ImageProcessorJob.perform_later(slides) if slides.any?
       redirect_to @slide_show
     else
       render :edit

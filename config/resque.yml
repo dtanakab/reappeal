@@ -1,0 +1,4 @@
+redis:
+  test: redis:127.0.0.1:6379
+  development: redis:127.0.0.1:6379
+  production: redis://h:p9633b8481204c583763cde9ebaf31923dc8aee11c0fbcde8d6fbcaabca083c94@ec2-35-170-253-237.compute-1.amazonaws.com:21089
