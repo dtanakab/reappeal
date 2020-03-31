@@ -3,7 +3,7 @@
 require "rails_helper"
 
 describe "SlideAPI" do
-  before { common_set_up }
+  before { common_setup }
   let(:slide_show) { create(:slide_show3) }
 
   it "get index of slides" do

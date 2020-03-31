@@ -4,9 +4,9 @@ h1 スライドショーページ
   .test#slide
     slide :slide-show-id=@slide_show.id
 - elsif @slide_show.slides.any?
-  | 表示できるスライドがありません。トップページからスライドを作成し直してください。
+  | まだスライド作成が完了していません。30秒ほどお待ちいただき、ページを再度リロードください。
 - else
-  | まだスライドが作成されていません
+  | まだスライドが作成されていません。
   br
   = link_to "項目を入力してスライドショーを作成", edit_slide_show_path(current_slide_show)
 br

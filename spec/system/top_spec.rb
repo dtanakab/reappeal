@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Top", type: :system do
-  before { common_set_up }
+  before { common_setup }
   let(:slide_show) { create(:slide_show1) }
 
   describe "show" do

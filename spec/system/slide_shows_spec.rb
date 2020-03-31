@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "SlideShow", type: :system do
-  before { common_set_up }
+  before { common_setup }
 
   describe "show" do
     context "with sign_in and any slides" do
@@ -80,7 +80,7 @@ RSpec.describe "SlideShow", type: :system do
       end
 
       it "return slide_show" do
-        expect(page).to have_content "表示できるスライドがありません"
+        expect(page).to have_content "すでにスライドショーを作成済みです"
       end
 
       it "back to top page" do
@@ -115,7 +115,7 @@ RSpec.describe "SlideShow", type: :system do
         fill_in "slide_show[slides_attributes][0][search_word]", with: "表紙タイトル"
         fill_in "slide_show[slides_attributes][1][search_word]", with: "テスト高校"
         click_button "スライドショーを作成"
-        expect(page).to have_content "1 ／ 2 ページ"
+        expect(page).to have_content "まだスライド作成が完了していません。"
       end
     end
   end

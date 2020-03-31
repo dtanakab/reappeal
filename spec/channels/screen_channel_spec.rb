@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ScreenChannel, type: :channel do
-  before { common_set_up }
+  before { common_setup }
   let(:slide_show) { create(:slide_show3) }
 
   describe "subscribe" do

@@ -80,5 +80,5 @@ gem "google-api-client"
 gem "mini_magick"
 gem "streamio-ffmpeg"
 gem "fog-aws"
-gem 'resque'
-gem 'resque-scheduler'
+gem "resque"
+gem "resque-scheduler"

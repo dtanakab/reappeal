@@ -16,7 +16,7 @@ module RequestSpecHelper
     logout(warden_scope(resource))
   end
 
-  def common_set_up
+  def common_setup
     types = %i(
       element_type1 element_type2 element_type3 element_type4
       element_type5 element_type6 element_type7 element_type8 element_type9
